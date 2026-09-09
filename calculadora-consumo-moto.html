@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de consumo y gasto de gasolina en moto | AguaYAsfalto</title>
+<meta name="description" content="Calcula cuántos litros de gasolina y cuánto dinero te costará un trayecto en moto según el consumo medio de tu modelo.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sitio">
+  <div class="barra-nav">
+    <div class="logo">Agua<span>Y</span>Asfalto</div>
+    <nav class="principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="calculadora-volumen-piscina.html">Volumen piscina</a></li>
+        <li><a href="calculadora-cloro-piscina.html">Cloro piscina</a></li>
+        <li><a href="calculadora-consumo-moto.html">Consumo moto</a></li>
+        <li><a href="calculadora-ruta-grupo-moto.html">Ruta en grupo</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="hero">
+    <h1>Calculadora de consumo y gasto en moto</h1>
+    <p class="subtitulo">Calcula cuántos litros de gasolina y cuánto dinero te va a costar un trayecto, según el consumo medio de tu moto.</p>
+  </section>
+
+  <div class="panel-calculadora">
+    <div class="campo">
+      <label for="distancia-moto">Distancia del trayecto (km)</label>
+      <input type="number" id="distancia-moto" placeholder="Ej: 250" min="0" step="1">
+    </div>
+
+    <div class="campo">
+      <label for="tipo-moto">Tipo de moto</label>
+      <select id="tipo-moto" onchange="cambiarTipoMoto()">
+        <option value="3.0">Scooter 125cc (~3,0 L/100km)</option>
+        <option value="3.8">Moto de carretera 125-300cc (~3,8 L/100km)</option>
+        <option value="5.5" selected>Naked/deportiva 600-900cc (~5,5 L/100km)</option>
+        <option value="5.0">Trail/adventure grande (~5,0 L/100km)</option>
+        <option value="6.0">Custom/cruiser gran cilindrada (~6,0 L/100km)</option>
+        <option value="6.5">Tourer/gran turismo (~6,5 L/100km)</option>
+        <option value="manual">Otro (indico yo el consumo)</option>
+      </select>
+    </div>
+
+    <div class="fila-dos">
+      <div class="campo">
+        <label for="consumo-moto">Consumo medio (L/100km)</label>
+        <input type="number" id="consumo-moto" value="5.5" min="0" step="0.1">
+      </div>
+      <div class="campo">
+        <label for="precio-gasolina">Precio de la gasolina (€/L)</label>
+        <input type="number" id="precio-gasolina" value="1.65" min="0" step="0.01">
+      </div>
+    </div>
+
+    <button class="boton-calcular" onclick="calcularConsumoMoto()">Calcular gasto</button>
+
+    <div class="resultado" id="resultado-moto">
+      <div class="valor-principal" id="coste-total-moto">—</div>
+      <div class="detalle" id="litros-moto">—</div>
+      <div class="aviso-caja">
+        El consumo real varía según el estilo de conducción, la velocidad, el viento, si vas cargado o llevas
+        pasajero, y el estado de la moto. Usa el dato de tu ordenador de a bordo si lo tienes para un resultado más preciso.
+      </div>
+    </div>
+  </div>
+
+  <div class="espacio-anuncio">Espacio reservado para anuncio (AdSense)</div>
+
+  <section class="articulo">
+    <h2>Cómo estimar el gasto de gasolina de una ruta en moto</h2>
+    <p>El cálculo es sencillo: litros necesarios = (distancia en km / 100) × consumo medio (L/100km). Multiplicando
+    esos litros por el precio del combustible obtienes el coste total del trayecto.</p>
+
+    <h3>¿Por qué las calculadoras de coche no sirven igual para moto?</h3>
+    <p>La mayoría de calculadoras de consumo que circulan están pensadas para coches, con consumos medios de
+    6-8 L/100km. Las motos, salvo las de gran cilindrada muy deportivas, suelen consumir bastante menos, así que
+    usar una calculadora genérica de coche suele sobreestimar el gasto real en moto.</p>
+
+    <h3>Factores que más cambian el consumo real</h3>
+    <p>La velocidad de crucero es el factor que más pesa: circular a 130 km/h puede disparar el consumo un 20-30%
+    frente a ir a 100-110 km/h. El viento de cara, llevar pasajero o maletas, y una presión de neumáticos baja
+    también suben el consumo de forma notable.</p>
+
+    <details class="faq">
+      <summary>¿Cómo sé el consumo real de mi moto en vez de usar la media?</summary>
+      <p>Llena el depósito, anota los km del cuentakilómetros, conduce con normalidad hasta la próxima repostada y
+      divide los litros repostados entre los km recorridos, multiplicando por 100. Repite un par de veces para tener
+      una media fiable.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Sirve esta calculadora para planear el gasto de una ruta en grupo?</summary>
+      <p>Para una sola moto sí. Si vais varias motos y queréis repartir el gasto total entre todos los participantes,
+      usa la <a href="calculadora-ruta-grupo-moto.html">calculadora de gasto de ruta en grupo</a>.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="sitio">
+  <div class="contenedor">
+    <div class="enlaces-pie">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="aviso-legal.html">Aviso legal y cookies</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+    </div>
+    <p>© 2026 AguaYAsfalto. Las calculadoras ofrecen estimaciones orientativas y no sustituyen el asesoramiento profesional.</p>
+  </div>
+</footer>
+
+<script src="cookies.js"></script>
+<script>
+function cambiarTipoMoto() {
+  var select = document.getElementById('tipo-moto');
+  var campoConsumo = document.getElementById('consumo-moto');
+  if (select.value !== 'manual') {
+    campoConsumo.value = select.value;
+  }
+}
+
+function formatearEuros(valor) {
+  return valor.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 });
+}
+
+function calcularConsumoMoto() {
+  var distancia = parseFloat(document.getElementById('distancia-moto').value);
+  var consumo = parseFloat(document.getElementById('consumo-moto').value);
+  var precio = parseFloat(document.getElementById('precio-gasolina').value);
+
+  if (!distancia || distancia <= 0 || !consumo || consumo <= 0 || !precio || precio <= 0) {
+    alert('Revisa la distancia, el consumo y el precio de la gasolina.');
+    return;
+  }
+
+  var litros = (distancia / 100) * consumo;
+  var costeTotal = litros * precio;
+
+  document.getElementById('coste-total-moto').textContent = formatearEuros(costeTotal);
+  document.getElementById('litros-moto').textContent = litros.toFixed(1) + ' litros para ' + distancia + ' km (' + formatearEuros(costeTotal / distancia) + '/km)';
+
+  document.getElementById('resultado-moto').classList.add('visible');
+
+  try {
+    localStorage.setItem('aya_ultimo_coste_moto', costeTotal.toFixed(2));
+    localStorage.setItem('aya_ultima_distancia_moto', distancia);
+  } catch (e) {}
+}
+</script>
+</body>
+</html>

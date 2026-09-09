@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://jorgespinr.github.io/aguayasfalto/sitemap.xml

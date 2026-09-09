@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de dosificación de cloro para piscina | AguaYAsfalto</title>
+<meta name="description" content="Calcula cuánto cloro añadir a tu piscina según su volumen, el tipo de producto (granulado, pastillas o líquido) y el nivel de cloro que quieres alcanzar.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sitio">
+  <div class="barra-nav">
+    <div class="logo">Agua<span>Y</span>Asfalto</div>
+    <nav class="principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="calculadora-volumen-piscina.html">Volumen piscina</a></li>
+        <li><a href="calculadora-cloro-piscina.html">Cloro piscina</a></li>
+        <li><a href="calculadora-consumo-moto.html">Consumo moto</a></li>
+        <li><a href="calculadora-ruta-grupo-moto.html">Ruta en grupo</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="hero">
+    <h1>Calculadora de dosificación de cloro</h1>
+    <p class="subtitulo">Calcula cuánto producto añadir para subir el nivel de cloro de tu piscina hasta el objetivo que quieres alcanzar.</p>
+  </section>
+
+  <div class="panel-calculadora">
+    <div class="campo">
+      <label for="volumen-cloro">Volumen de la piscina (m³)</label>
+      <input type="number" id="volumen-cloro" placeholder="Ej: 45" min="0" step="0.1">
+      <small>¿No lo sabes? Calcúlalo primero con la <a href="calculadora-volumen-piscina.html">calculadora de volumen</a> (se rellena solo si vienes de ahí).</small>
+    </div>
+
+    <div class="fila-dos">
+      <div class="campo">
+        <label for="cloro-actual">Cloro libre actual (ppm) — opcional</label>
+        <input type="number" id="cloro-actual" placeholder="Ej: 0.5" min="0" step="0.1">
+      </div>
+      <div class="campo">
+        <label for="cloro-objetivo">Cloro libre objetivo (ppm)</label>
+        <input type="number" id="cloro-objetivo" placeholder="Ej: 2" min="0" step="0.1">
+        <small>Rango habitual recomendado: 1-3 ppm para uso normal.</small>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="producto">Tipo de producto</label>
+      <select id="producto" onchange="cambiarProducto()">
+        <option value="0.65|solido">Hipoclorito cálcico granulado (~65% cloro activo)</option>
+        <option value="0.56|solido">Dicloro granulado (~56% cloro activo)</option>
+        <option value="0.90|solido">Tricloro en pastillas / multiacción (~90% cloro activo)</option>
+        <option value="0.10|liquido">Hipoclorito sódico líquido / lejía de piscinas (~10% ≈ 100 g/L)</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="pureza">% de cloro activo del producto (ajusta si tu etiqueta dice otra cosa)</label>
+      <input type="number" id="pureza" value="65" min="1" max="100" step="1">
+    </div>
+
+    <button class="boton-calcular" onclick="calcularCloro()">Calcular dosis</button>
+
+    <div class="resultado" id="resultado-cloro">
+      <div class="valor-principal" id="dosis-valor">—</div>
+      <div class="detalle" id="dosis-detalle">—</div>
+      <div class="aviso-caja">
+        Estimación basada en la diferencia entre el cloro actual y el objetivo. Añade el producto siempre siguiendo
+        las instrucciones del fabricante, con la piscina en marcha y sin bañistas dentro hasta que el cloro se
+        reparta y baje a un nivel seguro. Ante cualquier duda, consulta la etiqueta del producto.
+      </div>
+    </div>
+  </div>
+
+  <div class="espacio-anuncio">Espacio reservado para anuncio (AdSense)</div>
+
+  <section class="articulo">
+    <h2>Cómo se calcula la dosis de cloro</h2>
+    <p>La cantidad de cloro "puro" (activo) que necesitas añadir depende solo de dos cosas: cuántos ppm quieres subir
+    el nivel de cloro y cuántos litros de agua tienes. La fórmula, en su forma más simple, es:</p>
+    <p><strong>Gramos de cloro puro necesarios = (ppm que quieres subir) × (volumen en m³)</strong></p>
+    <p>Como ningún producto es 100% cloro puro, después hay que dividir entre el porcentaje de cloro activo que
+    indica la etiqueta del producto para saber cuánto producto real hace falta añadir.</p>
+
+    <h3>Granulado, pastillas o líquido: ¿cuál elegir?</h3>
+    <p>El <strong>granulado</strong> (hipoclorito cálcico o dicloro) se disuelve rápido y es ideal para subir el nivel
+    de golpe. Las <strong>pastillas de tricloro</strong> se usan sobre todo para el mantenimiento continuo, disolviéndose
+    poco a poco en el skimmer o un dosificador flotante. El <strong>líquido</strong> (hipoclorito sódico) actúa muy
+    rápido pero se degrada antes con el sol, por lo que se usa más en piscinas cubiertas o de uso intensivo.</p>
+
+    <h3>Rangos de cloro libre recomendados</h3>
+    <p>Para uso recreativo normal se suele recomendar mantener el cloro libre entre 1 y 3 ppm. Por debajo de 1 ppm el
+    agua pierde capacidad desinfectante; por encima de 3 ppm puede empezar a irritar piel y ojos sin necesidad.</p>
+
+    <details class="faq">
+      <summary>¿Puedo bañarme justo después de añadir el cloro?</summary>
+      <p>No es recomendable. Espera a que el producto se disuelva y circule bien (normalmente varias horas con el
+      filtro en marcha) y comprueba el nivel de cloro con tiras reactivas antes de bañarte.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Esta calculadora sirve para piscinas de agua salada?</summary>
+      <p>Sirve igualmente para saber cuánto cloro libre tienes o quieres alcanzar, aunque en piscinas de sal el cloro
+      lo genera el propio clorador salino a partir de la sal, no se añade directamente este tipo de producto.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="sitio">
+  <div class="contenedor">
+    <div class="enlaces-pie">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="aviso-legal.html">Aviso legal y cookies</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+    </div>
+    <p>© 2026 AguaYAsfalto. Las calculadoras ofrecen estimaciones orientativas y no sustituyen el asesoramiento profesional.</p>
+  </div>
+</footer>
+
+<script src="cookies.js"></script>
+<script>
+function cambiarProducto() {
+  var valor = document.getElementById('producto').value.split('|');
+  var porcentaje = parseFloat(valor[0]) * 100;
+  document.getElementById('pureza').value = porcentaje;
+}
+
+function calcularCloro() {
+  var volumen = parseFloat(document.getElementById('volumen-cloro').value);
+  var actual = parseFloat(document.getElementById('cloro-actual').value) || 0;
+  var objetivo = parseFloat(document.getElementById('cloro-objetivo').value);
+  var pureza = parseFloat(document.getElementById('pureza').value);
+  var esLiquido = document.getElementById('producto').value.indexOf('liquido') !== -1;
+
+  if (!volumen || volumen <= 0 || !objetivo || objetivo <= 0 || !pureza || pureza <= 0) {
+    alert('Revisa el volumen, el objetivo de cloro y el % de producto.');
+    return;
+  }
+
+  var incremento = objetivo - actual;
+  if (incremento <= 0) {
+    document.getElementById('dosis-valor').textContent = 'No hace falta añadir cloro';
+    document.getElementById('dosis-detalle').textContent = 'Tu nivel actual ya alcanza el objetivo indicado.';
+    document.getElementById('resultado-cloro').classList.add('visible');
+    return;
+  }
+
+  var gramosPuros = incremento * volumen; // ppm(mg/L) * volumen(m3) = gramos de cloro puro
+  var gramosProducto = gramosPuros / (pureza / 100);
+
+  if (esLiquido) {
+    // Aproximación: para soluciones diluidas, densidad ~1 g/mL, así que gramos ≈ mililitros
+    var litrosProducto = gramosProducto / 1000;
+    document.getElementById('dosis-valor').textContent = litrosProducto.toFixed(2) + ' litros de producto';
+    document.getElementById('dosis-detalle').textContent = 'Para subir de ' + actual.toFixed(1) + ' a ' + objetivo.toFixed(1) + ' ppm en ' + volumen + ' m³ de agua (aprox., asumiendo densidad ≈ 1 kg/L).';
+  } else {
+    document.getElementById('dosis-valor').textContent = Math.round(gramosProducto).toLocaleString('es-ES') + ' gramos de producto';
+    document.getElementById('dosis-detalle').textContent = 'Para subir de ' + actual.toFixed(1) + ' a ' + objetivo.toFixed(1) + ' ppm en ' + volumen + ' m³ de agua.';
+  }
+
+  document.getElementById('resultado-cloro').classList.add('visible');
+}
+
+// Autorrellenar el volumen si viene de la calculadora de volumen
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var guardado = localStorage.getItem('aya_volumen_m3');
+    if (guardado) {
+      document.getElementById('volumen-cloro').value = guardado;
+    }
+  } catch (e) {}
+});
+</script>
+</body>
+</html>

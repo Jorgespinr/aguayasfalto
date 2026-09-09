@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de volumen de piscina (litros y m³) | AguaYAsfalto</title>
+<meta name="description" content="Calcula cuántos litros o metros cúbicos de agua tiene tu piscina rectangular o redonda. Imprescindible antes de dosificar cloro u otros productos.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sitio">
+  <div class="barra-nav">
+    <div class="logo">Agua<span>Y</span>Asfalto</div>
+    <nav class="principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="calculadora-volumen-piscina.html">Volumen piscina</a></li>
+        <li><a href="calculadora-cloro-piscina.html">Cloro piscina</a></li>
+        <li><a href="calculadora-consumo-moto.html">Consumo moto</a></li>
+        <li><a href="calculadora-ruta-grupo-moto.html">Ruta en grupo</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="hero">
+    <h1>Calculadora de volumen de piscina</h1>
+    <p class="subtitulo">Averigua cuántos litros de agua tiene tu piscina. Es el dato que necesitas antes de calcular cualquier dosis de cloro u otro producto.</p>
+  </section>
+
+  <div class="panel-calculadora">
+    <div class="campo">
+      <label for="forma">Forma de la piscina</label>
+      <select id="forma" onchange="cambiarForma()">
+        <option value="rectangular">Rectangular</option>
+        <option value="redonda">Redonda / ovalada</option>
+      </select>
+    </div>
+
+    <div id="campos-rectangular">
+      <div class="fila-dos">
+        <div class="campo">
+          <label for="largo">Largo (m)</label>
+          <input type="number" id="largo" placeholder="Ej: 8" min="0" step="0.1">
+        </div>
+        <div class="campo">
+          <label for="ancho">Ancho (m)</label>
+          <input type="number" id="ancho" placeholder="Ej: 4" min="0" step="0.1">
+        </div>
+      </div>
+    </div>
+
+    <div id="campos-redonda" style="display:none;">
+      <div class="campo">
+        <label for="diametro">Diámetro (m)</label>
+        <input type="number" id="diametro" placeholder="Ej: 5" min="0" step="0.1">
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="profundidad">Profundidad media (m)</label>
+      <input type="number" id="profundidad" placeholder="Ej: 1.4" min="0" step="0.05">
+      <small>Si tu piscina tiene zona poco profunda y zona honda, suma ambas medidas y divide entre 2.</small>
+    </div>
+
+    <button class="boton-calcular" onclick="calcularVolumen()">Calcular volumen</button>
+
+    <div class="resultado" id="resultado-volumen">
+      <div class="valor-principal" id="volumen-litros">—</div>
+      <div class="detalle" id="volumen-m3">—</div>
+      <div class="aviso-caja">
+        Resultado orientativo: no tiene en cuenta escalones, bancos de obra ni formas irregulares, que reducen
+        ligeramente el volumen real de agua.
+      </div>
+    </div>
+  </div>
+
+  <div class="espacio-anuncio">Espacio reservado para anuncio (AdSense)</div>
+
+  <section class="articulo">
+    <h2>¿Por qué necesito saber el volumen de mi piscina?</h2>
+    <p>Casi todos los productos de mantenimiento de piscinas (cloro, algicida, corrector de pH, sal para clorador
+    salino) se dosifican en función de los litros o metros cúbicos de agua. Añadir "a ojo" es la causa más habitual
+    de piscinas con demasiado o muy poco cloro, agua turbia o irritación en la piel y los ojos.</p>
+
+    <h3>Cómo se calcula</h3>
+    <p>Para una piscina <strong>rectangular</strong>: volumen = largo × ancho × profundidad media.<br>
+    Para una piscina <strong>redonda u ovalada</strong>: volumen = π × (diámetro / 2)² × profundidad media.</p>
+    <p>Un metro cúbico (m³) equivale a 1.000 litros, así que basta multiplicar el resultado en m³ por 1.000 para
+    tener los litros exactos.</p>
+
+    <h3>¿Y si mi piscina tiene forma irregular?</h3>
+    <p>Puedes aproximarla dividiéndola mentalmente en 2-3 zonas más o menos rectangulares o circulares, calculando el
+    volumen de cada una por separado con esta misma calculadora y sumando los resultados.</p>
+
+    <details class="faq">
+      <summary>¿Debo restar el volumen que ocupan las personas o el equipo de la piscina?</summary>
+      <p>No es necesario para el uso habitual de dosificación de productos; el margen de error es insignificante frente
+      al volumen total de agua.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Cada cuánto necesito volver a calcular el volumen?</summary>
+      <p>Solo una vez, salvo que cambies la forma o el nivel de llenado habitual de la piscina. Guarda el dato: lo
+      necesitarás en la <a href="calculadora-cloro-piscina.html">calculadora de dosificación de cloro</a>.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="sitio">
+  <div class="contenedor">
+    <div class="enlaces-pie">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="aviso-legal.html">Aviso legal y cookies</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+    </div>
+    <p>© 2026 AguaYAsfalto. Las calculadoras ofrecen estimaciones orientativas y no sustituyen el asesoramiento profesional.</p>
+  </div>
+</footer>
+
+<script src="cookies.js"></script>
+<script>
+function cambiarForma() {
+  var forma = document.getElementById('forma').value;
+  document.getElementById('campos-rectangular').style.display = forma === 'rectangular' ? 'block' : 'none';
+  document.getElementById('campos-redonda').style.display = forma === 'redonda' ? 'block' : 'none';
+}
+
+function calcularVolumen() {
+  var forma = document.getElementById('forma').value;
+  var profundidad = parseFloat(document.getElementById('profundidad').value);
+  var volumenM3;
+
+  if (!profundidad || profundidad <= 0) {
+    alert('Introduce una profundidad media válida.');
+    return;
+  }
+
+  if (forma === 'rectangular') {
+    var largo = parseFloat(document.getElementById('largo').value);
+    var ancho = parseFloat(document.getElementById('ancho').value);
+    if (!largo || largo <= 0 || !ancho || ancho <= 0) {
+      alert('Introduce largo y ancho válidos.');
+      return;
+    }
+    volumenM3 = largo * ancho * profundidad;
+  } else {
+    var diametro = parseFloat(document.getElementById('diametro').value);
+    if (!diametro || diametro <= 0) {
+      alert('Introduce un diámetro válido.');
+      return;
+    }
+    var radio = diametro / 2;
+    volumenM3 = Math.PI * radio * radio * profundidad;
+  }
+
+  var litros = volumenM3 * 1000;
+
+  document.getElementById('volumen-litros').textContent = Math.round(litros).toLocaleString('es-ES') + ' litros';
+  document.getElementById('volumen-m3').textContent = volumenM3.toFixed(2) + ' m³';
+
+  document.getElementById('resultado-volumen').classList.add('visible');
+
+  // Guardamos el volumen para poder reutilizarlo en la calculadora de cloro
+  try { localStorage.setItem('aya_volumen_m3', volumenM3.toFixed(2)); } catch (e) {}
+}
+</script>
+</body>
+</html>

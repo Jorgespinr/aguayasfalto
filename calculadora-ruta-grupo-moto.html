@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de gasto de ruta en grupo (moto) | AguaYAsfalto</title>
+<meta name="description" content="Reparte el gasto de gasolina de una ruta en moto en grupo entre todos los participantes de forma justa y sin discusiones.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sitio">
+  <div class="barra-nav">
+    <div class="logo">Agua<span>Y</span>Asfalto</div>
+    <nav class="principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="calculadora-volumen-piscina.html">Volumen piscina</a></li>
+        <li><a href="calculadora-cloro-piscina.html">Cloro piscina</a></li>
+        <li><a href="calculadora-consumo-moto.html">Consumo moto</a></li>
+        <li><a href="calculadora-ruta-grupo-moto.html">Ruta en grupo</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="hero">
+    <h1>Calculadora de gasto de ruta en grupo</h1>
+    <p class="subtitulo">Calcula cuánto le toca pagar a cada uno cuando salís varias motos de ruta y queréis repartir el gasto de gasolina de forma justa.</p>
+  </section>
+
+  <div class="panel-calculadora">
+    <div class="campo">
+      <label for="distancia-grupo">Distancia total de la ruta (km)</label>
+      <input type="number" id="distancia-grupo" placeholder="Ej: 300" min="0" step="1">
+    </div>
+
+    <div class="fila-dos">
+      <div class="campo">
+        <label for="consumo-grupo">Consumo medio del grupo (L/100km)</label>
+        <input type="number" id="consumo-grupo" value="5.5" min="0" step="0.1">
+        <small>Si las motos son muy distintas, usa una media aproximada.</small>
+      </div>
+      <div class="campo">
+        <label for="precio-grupo">Precio de la gasolina (€/L)</label>
+        <input type="number" id="precio-grupo" value="1.65" min="0" step="0.01">
+      </div>
+    </div>
+
+    <div class="fila-dos">
+      <div class="campo">
+        <label for="num-motos">Número de motos</label>
+        <input type="number" id="num-motos" placeholder="Ej: 4" min="1" step="1">
+      </div>
+      <div class="campo">
+        <label for="num-personas">Personas que reparten el gasto</label>
+        <input type="number" id="num-personas" placeholder="Ej: 5" min="1" step="1">
+        <small>Puede ser distinto al número de motos si alguien lleva pasajero.</small>
+      </div>
+    </div>
+
+    <button class="boton-calcular" onclick="calcularRutaGrupo()">Calcular reparto</button>
+
+    <div class="resultado" id="resultado-grupo">
+      <div class="valor-principal" id="coste-persona">—</div>
+      <div class="detalle" id="detalle-grupo">—</div>
+      <div class="aviso-caja">
+        Este reparto asume que todas las motos consumen de forma parecida. Si alguna moto gasta mucho más o menos que
+        la media del grupo, tenerlo en cuenta a la hora de repartir es cosa vuestra: esto es solo un punto de partida
+        razonable.
+      </div>
+    </div>
+  </div>
+
+  <div class="espacio-anuncio">Espacio reservado para anuncio (AdSense)</div>
+
+  <section class="articulo">
+    <h2>¿Por moto o por persona?</h2>
+    <p>Hay dos formas habituales de repartir el gasto de una ruta en grupo: a partes iguales entre motos (cada moto
+    paga lo mismo, independientemente de si lleva pasajero) o a partes iguales entre personas (incluyendo a los
+    pasajeros en el reparto). Esta calculadora te da ambos números para que decidáis en el grupo cuál os parece más
+    justo.</p>
+
+    <h3>Cómo se calcula</h3>
+    <p>Primero se calcula el gasto total de gasolina del grupo: litros = (distancia / 100) × consumo medio, y coste
+    total = litros × precio del combustible. Después, ese coste total se divide entre el número de motos y, por
+    separado, entre el número de personas que van a pagar.</p>
+
+    <h3>Consejos para rutas en grupo</h3>
+    <p>Es habitual acordar antes de salir si el reparto va por moto o por persona, sobre todo si alguien lleva
+    pasajero. También ayuda decidir de antemano quién lleva la "caja común" del grupo para pagar en cada repostaje y
+    hacer las cuentas una sola vez al final, en lugar de calcularlo en cada gasolinera.</p>
+
+    <details class="faq">
+      <summary>¿Incluye esto los peajes o el coste de las paradas?</summary>
+      <p>No, esta calculadora solo estima el gasto de combustible. Si vais a repartir también peajes, comidas o
+      alojamiento, tendréis que sumarlos aparte al reparto final.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Y si unas motos hacen más kilómetros que otras por desvíos?</summary>
+      <p>Para simplificar, esta calculadora asume que todo el grupo recorre la misma distancia total. Si hay
+      diferencias grandes, lo más práctico es calcular el gasto de cada moto por separado con la
+      <a href="calculadora-consumo-moto.html">calculadora de consumo individual</a> y sumar los resultados.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="sitio">
+  <div class="contenedor">
+    <div class="enlaces-pie">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="aviso-legal.html">Aviso legal y cookies</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+    </div>
+    <p>© 2026 AguaYAsfalto. Las calculadoras ofrecen estimaciones orientativas y no sustituyen el asesoramiento profesional.</p>
+  </div>
+</footer>
+
+<script src="cookies.js"></script>
+<script>
+function formatearEuros(valor) {
+  return valor.toLocaleString('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 });
+}
+
+function calcularRutaGrupo() {
+  var distancia = parseFloat(document.getElementById('distancia-grupo').value);
+  var consumo = parseFloat(document.getElementById('consumo-grupo').value);
+  var precio = parseFloat(document.getElementById('precio-grupo').value);
+  var numMotos = parseFloat(document.getElementById('num-motos').value);
+  var numPersonas = parseFloat(document.getElementById('num-personas').value);
+
+  if (!distancia || distancia <= 0 || !consumo || consumo <= 0 || !precio || precio <= 0 || !numMotos || numMotos <= 0 || !numPersonas || numPersonas <= 0) {
+    alert('Revisa que todos los campos tengan valores válidos.');
+    return;
+  }
+
+  var litrosPorMoto = (distancia / 100) * consumo;
+  var costeTotal = litrosPorMoto * precio * numMotos;
+  var costePorMoto = costeTotal / numMotos;
+  var costePorPersona = costeTotal / numPersonas;
+
+  document.getElementById('coste-persona').textContent = formatearEuros(costePorPersona) + ' / persona';
+  document.getElementById('detalle-grupo').innerHTML =
+    'Gasto total del grupo: ' + formatearEuros(costeTotal) + '<br>' +
+    'Por moto (' + numMotos + '): ' + formatearEuros(costePorMoto) + '<br>' +
+    'Por persona (' + numPersonas + '): ' + formatearEuros(costePorPersona);
+
+  document.getElementById('resultado-grupo').classList.add('visible');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var distanciaGuardada = localStorage.getItem('aya_ultima_distancia_moto');
+    if (distanciaGuardada) {
+      document.getElementById('distancia-grupo').value = distanciaGuardada;
+    }
+  } catch (e) {}
+});
+</script>
+</body>
+</html>
