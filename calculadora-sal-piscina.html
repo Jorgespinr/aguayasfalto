@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de sal para piscina con clorador salino | AguaYAsfalto</title>
+<meta name="description" content="Calcula cuántos kilos de sal añadir a tu piscina de clorador salino para alcanzar el nivel recomendado por el fabricante.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="sitio">
+  <div class="barra-nav">
+    <div class="logo">Agua<span>Y</span>Asfalto</div>
+    <nav class="principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="calculadora-volumen-piscina.html">Volumen piscina</a></li>
+        <li><a href="calculadora-cloro-piscina.html">Cloro piscina</a></li>
+        <li><a href="calculadora-sal-piscina.html">Sal piscina</a></li>
+        <li><a href="calculadora-consumo-moto.html">Consumo moto</a></li>
+        <li><a href="calculadora-ruta-grupo-moto.html">Ruta en grupo</a></li>
+        <li><a href="guias.html">Guías</a></li>
+        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="hero">
+    <h1>Calculadora de sal para piscina con clorador salino</h1>
+    <p class="subtitulo">Calcula cuántos kilos de sal necesitas añadir para alcanzar el nivel de salinidad recomendado por tu clorador.</p>
+  </section>
+
+  <div class="panel-calculadora">
+    <div class="campo">
+      <label for="volumen-sal">Volumen de la piscina (m³)</label>
+      <input type="number" id="volumen-sal" placeholder="Ej: 45" min="0" step="0.1">
+      <small>¿No lo sabes? Calcúlalo con la <a href="calculadora-volumen-piscina.html">calculadora de volumen</a> (se rellena solo si vienes de ahí).</small>
+    </div>
+
+    <div class="fila-dos">
+      <div class="campo">
+        <label for="sal-actual">Salinidad actual (g/L o ppm/1000) — opcional</label>
+        <input type="number" id="sal-actual" placeholder="Ej: 0" min="0" step="0.1">
+        <small>Si la piscina es de agua dulce recién llenada, pon 0.</small>
+      </div>
+      <div class="campo">
+        <label for="sal-objetivo">Salinidad objetivo (g/L)</label>
+        <input type="number" id="sal-objetivo" value="5" min="0" step="0.1">
+        <small>Consulta el manual de tu clorador: lo habitual está entre 4 y 6 g/L.</small>
+      </div>
+    </div>
+
+    <button class="boton-calcular" onclick="calcularSal()">Calcular sal necesaria</button>
+
+    <div class="resultado" id="resultado-sal">
+      <div class="valor-principal" id="sal-valor">—</div>
+      <div class="detalle" id="sal-detalle">—</div>
+      <div class="aviso-caja">
+        Añade la sal en varias veces, repartida por el perímetro de la piscina, con el filtro en marcha y cepillando
+        el fondo para ayudar a disolverla — se deposita en el suelo antes de disolverse del todo. Comprueba siempre
+        el nivel real con el medidor de tu clorador antes de añadir más.
+      </div>
+    </div>
+  </div>
+
+  <div class="espacio-anuncio">Espacio reservado para anuncio (AdSense)</div>
+
+  <section class="articulo">
+    <h2>Cómo funciona la sal en una piscina de clorador salino</h2>
+    <p>Un clorador salino no "sustituye" al cloro: lo genera automáticamente a partir de la sal disuelta en el agua,
+    mediante un proceso de electrólisis. Por eso el agua sigue estando desinfectada con cloro, solo que no lo añades
+    tú directamente en forma de producto.</p>
+
+    <h2>Cómo se calcula la cantidad de sal</h2>
+    <p>La fórmula es la misma lógica que la dosificación de cloro: kilos de sal = (salinidad objetivo − salinidad
+    actual, en g/L) × volumen de la piscina en m³ ÷ 1. Como 1 g/L equivale a 1 kg por cada m³ de agua, el cálculo es
+    directo una vez conoces el volumen.</p>
+
+    <h2>¿Por qué cada fabricante recomienda un nivel distinto?</h2>
+    <p>Cada modelo de clorador está diseñado para trabajar de forma óptima en un rango concreto (normalmente entre 4
+    y 6 g/L, aunque hay modelos de "baja sal" que trabajan por debajo de 3 g/L). Salirse de ese rango puede reducir
+    la producción de cloro o forzar el equipo, así que el dato más fiable es siempre el manual de tu clorador, no una
+    cifra genérica.</p>
+
+    <h2>¿Cuándo hay que volver a añadir sal?</h2>
+    <p>El clorador no "consume" la sal (la regenera constantemente), pero el nivel baja con el tiempo por otros
+    motivos: vaciados parciales, lluvia abundante que diluye el agua, salpicaduras y arrastre en bañistas y toallas,
+    o un lavado a contracorriente del filtro. Por eso conviene medir la salinidad cada varias semanas, sobre todo
+    después de rellenar con agua nueva.</p>
+
+    <details class="faq">
+      <summary>¿Puedo usar sal de mesa normal?</summary>
+      <p>No se recomienda: la sal de mesa suele llevar aditivos antiapelmazantes o yodo que pueden enturbiar el agua
+      o dañar el equipo. Usa sal específica para piscinas (cloruro sódico de alta pureza, sin aditivos).</p>
+    </details>
+    <details class="faq">
+      <summary>¿Demasiada sal es peligrosa?</summary>
+      <p>Un exceso notable de salinidad puede acelerar la corrosión de elementos metálicos de la piscina y forzar el
+      clorador. Si te has pasado, la única forma de bajarlo es diluir con agua nueva (parcial o totalmente).</p>
+    </details>
+    <details class="faq">
+      <summary>¿La sal se pierde por evaporación?</summary>
+      <p>No: cuando el agua se evapora, la sal se queda. Lo que ocurre es que la concentración sube ligeramente al
+      bajar el nivel de agua, así que al rellenar con agua nueva (sin sal) la concentración vuelve a bajar un poco.</p>
+    </details>
+  </section>
+
+</main>
+
+<footer class="sitio">
+  <div class="contenedor">
+    <div class="enlaces-pie">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="aviso-legal.html">Aviso legal y cookies</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+    </div>
+    <p>© 2026 AguaYAsfalto. Las calculadoras ofrecen estimaciones orientativas y no sustituyen el asesoramiento profesional.</p>
+  </div>
+</footer>
+
+<script src="cookies.js"></script>
+<script>
+function calcularSal() {
+  var volumen = parseFloat(document.getElementById('volumen-sal').value);
+  var actual = parseFloat(document.getElementById('sal-actual').value) || 0;
+  var objetivo = parseFloat(document.getElementById('sal-objetivo').value);
+
+  if (!volumen || volumen <= 0 || !objetivo || objetivo <= 0) {
+    alert('Revisa el volumen y la salinidad objetivo.');
+    return;
+  }
+
+  var diferencia = objetivo - actual;
+  if (diferencia <= 0) {
+    document.getElementById('sal-valor').textContent = 'No hace falta añadir sal';
+    document.getElementById('sal-detalle').textContent = 'Tu nivel actual ya alcanza o supera el objetivo indicado.';
+    document.getElementById('resultado-sal').classList.add('visible');
+    return;
+  }
+
+  var kilos = diferencia * volumen;
+
+  document.getElementById('sal-valor').textContent = kilos.toFixed(1) + ' kg de sal';
+  document.getElementById('sal-detalle').textContent = 'Para subir de ' + actual.toFixed(1) + ' a ' + objetivo.toFixed(1) + ' g/L en ' + volumen + ' m³ de agua.';
+
+  document.getElementById('resultado-sal').classList.add('visible');
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    var guardado = localStorage.getItem('aya_volumen_m3');
+    if (guardado) {
+      document.getElementById('volumen-sal').value = guardado;
+    }
+  } catch (e) {}
+});
+</script>
+</body>
+</html>

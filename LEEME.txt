@@ -1,0 +1,106 @@
+AguaYAsfalto — sitio de calculadoras para AdSense (piscinas + moto)
+=====================================================================
+
+POR QUÉ ESTE NICHO
+Descartamos el nicho genérico de "calculadora de hipoteca/nómina/IMC" por estar
+saturado: en hipoteca compiten bancos y portales grandes (BBVA, idealista,
+iAhorro); en nómina hay ya varios sitios pequeños casi idénticos a lo que
+íbamos a montar. En piscinas, en cambio, la competencia son sobre todo tiendas
+de productos químicos (no páginas de contenido dedicadas), y en consumo de
+moto casi todo lo que existe está pensado para coche. Ese es el hueco que
+aprovecha este sitio. Nota: el contenido está redactado de forma genérica
+(no asume que el autor tenga piscina o moto propia); si en algún momento
+tienes acceso a experiencia real con alguno de los dos temas, el contenido
+ganará en autenticidad, pero no es indispensable para lanzarlo.
+
+QUÉ HAY AQUÍ
+- index.html                          Página principal con las 4 calculadoras
+- calculadora-volumen-piscina.html     Litros/m³ de una piscina rectangular o redonda
+- calculadora-cloro-piscina.html       Dosis de cloro (granulado/pastillas/líquido)
+- calculadora-consumo-moto.html        Litros y coste de un trayecto en moto
+- calculadora-ruta-grupo-moto.html     Reparto del gasto de una ruta en grupo
+- sobre-nosotros.html                  Página "quiénes somos" (recomendada por Google)
+- privacidad.html                      Plantilla de política de privacidad (COMPLETAR)
+- aviso-legal.html                     Plantilla de aviso legal (COMPLETAR)
+- style.css                            Estilos compartidos
+- cookies.js                           Aviso de cookies simple (banner)
+- robots.txt / sitemap.xml             Para indexación en Google (ya apuntan a tu URL de GitHub Pages)
+
+DETALLE TÉCNICO DE LAS FÓRMULAS (por si quieres revisarlas o ajustarlas)
+- Volumen piscina rectangular: largo × ancho × profundidad media
+- Volumen piscina redonda: π × (diámetro/2)² × profundidad media
+- Dosis de cloro: gramos de cloro puro = ppm a subir × volumen en m³;
+  gramos de producto = gramos puros / (% de cloro activo del producto)
+- Consumo moto: litros = (km / 100) × consumo medio (L/100km); coste = litros × precio/L
+- Reparto de ruta: coste total = litros por moto × precio × nº de motos;
+  se divide entre nº de motos y, por separado, entre nº de personas
+
+ANTES DE PUBLICAR
+1. El email de contacto ya está puesto (aguayasfalto@gmail.com) y el nombre
+   comercial es "Agua-Y-Asfalto". Falta solo tu NOMBRE COMPLETO real: busca
+   "[tu nombre completo]" en privacidad.html y aviso-legal.html y sustitúyelo.
+2. robots.txt y sitemap.xml ya apuntan a tu URL final de GitHub Pages:
+   https://jorgespinr.github.io/aguayasfalto/
+3. Revisa que las plantillas legales se ajusten a tu caso (si más adelante
+   te das de alta como autónomo, o vives fuera de España, conviene que las
+   revise un profesional; no son asesoramiento legal).
+
+CÓMO PUBLICARLO EN GITHUB PAGES (con tu cuenta jorgespinr)
+Opción A — subiendo los archivos desde la web de GitHub (sin usar Git):
+  1. Entra en github.com con tu cuenta y pulsa "New repository".
+  2. Nombra el repositorio exactamente "aguayasfalto", márcalo como Public
+     y crea el repositorio (no hace falta añadir README).
+  3. Dentro del repo, pulsa "Add file" > "Upload files".
+  4. Descomprime este zip en tu ordenador y arrastra TODOS los archivos
+     (no la carpeta, los archivos sueltos: index.html, style.css, etc.) a
+     la ventana de subida. Confirma el commit ("Commit changes").
+  5. Ve a la pestaña "Settings" del repo > "Pages" (menú lateral).
+  6. En "Source" elige "Deploy from a branch", branch "main", carpeta "/root",
+     y guarda.
+  7. Espera 1-2 minutos: GitHub te dará la URL pública, que será
+     https://jorgespinr.github.io/aguayasfalto/
+
+Opción B — con Git (si prefieres la terminal):
+  git init
+  git add .
+  git commit -m "Primera versión de AguaYAsfalto"
+  git branch -M main
+  git remote add origin https://github.com/jorgespinr/aguayasfalto.git
+  git push -u origin main
+  (Luego repite los pasos 5-7 de la Opción A para activar Pages.)
+
+Dominio propio (opcional, más adelante): puedes seguir usando la URL gratuita
+de github.io indefinidamente. Si más adelante compras un dominio propio
+(recomendado antes de pedir AdSense, aunque no es obligatorio), en
+Settings > Pages añades el dominio en "Custom domain" y actualizas
+robots.txt, sitemap.xml y las páginas legales con la nueva URL.
+
+CÓMO PEDIR ADSENSE
+1. Publica el sitio con contenido real (ya lo tiene) durante un tiempo antes
+   de solicitar: Google valora que el sitio tenga cierta antigüedad y
+   tráfico, aunque sea poco.
+2. Da de alta el sitio en Google Search Console y envía el sitemap.xml para
+   que se indexe más rápido.
+3. Ve a https://www.google.com/adsense/ , añade tu sitio y sigue el proceso
+   de verificación (añadir un meta tag o archivo a la raíz del sitio).
+4. Mientras esperas la aprobación, sigue añadiendo contenido: más
+   calculadoras de piscina o moto, artículos explicativos, etc.
+5. Cuando te aprueben, pega el fragmento de código que te da AdSense justo
+   antes de </head> en cada página (o usa auto ads). Sustituye entonces los
+   <div class="espacio-anuncio"> por los bloques de anuncio reales si
+   prefieres anuncios manuales en esas posiciones.
+
+IDEAS PARA AMPLIAR MÁS ADELANTE
+- Piscina: calculadora de pH/reductor de pH, de sal para clorador salino,
+  de coste de llenado según precio del agua.
+- Moto: calculadora de intervalos de revisión/aceite, de presión de
+  neumáticos según carga, comparador de coste moto vs coche para ir al trabajo.
+
+IMPORTANTE — QUÉ NO HACER
+- No pidas ni incentives a nadie a hacer clic en los anuncios (ni con
+  mensajes en la web, ni con amigos/familia, ni con bots). Es la forma más
+  rápida de que Google banee la cuenta de forma permanente y sin cobrar.
+- No uses tráfico comprado de baja calidad ni granjas de clics.
+- Los ingresos dependen del tráfico real: esto crece con el tiempo (SEO,
+  compartir en foros de piscinas o de moteros donde tenga sentido), no de la
+  noche a la mañana.
